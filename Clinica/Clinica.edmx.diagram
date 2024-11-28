@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f8c5bf850da04c56ad7a3fcecd4803c3" Name="Diagram1">
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Citas" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.EstadosTratamiento" Width="1.5" PointX="3.75" PointY="11" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Facturacion" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.HistorialMedico" Width="1.5" PointX="3" PointY="7.75" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.HistorialPacientes" Width="1.5" PointX="7.75" PointY="6" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Horarios" Width="1.5" PointX="10" PointY="2.25" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Inventario" Width="1.5" PointX="8.75" PointY="9" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Pacientes" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Profesionales" Width="1.5" PointX="7.75" PointY="2.25" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Salas" Width="1.5" PointX="9.75" PointY="6" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Servicios" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.ServiciosPrestados" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="FisioterapiayOsteopatiaArielMongeModel.Tratamientos" Width="1.5" PointX="6" PointY="8.5" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Citas__PacienteI__267ABA7A" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__CitaI__3F466844" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Estad__2E1BDC42" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Facturaci__Pacie__3A81B327" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Historial__Pacie__37A5467C" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Horarios__Profes__34C8D9D1" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Pacie__2D27B809" />
+        <AssociationConnector Association="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__Servi__403A8C7D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

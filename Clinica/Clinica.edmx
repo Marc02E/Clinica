@@ -1,0 +1,758 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FisioterapiayOsteopatiaArielMongeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="CitaID" />
+          </Key>
+          <Property Name="CitaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PacienteID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Motivo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadosTratamiento">
+          <Key>
+            <PropertyRef Name="EstadoID" />
+          </Key>
+          <Property Name="EstadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturacion">
+          <Key>
+            <PropertyRef Name="FacturaID" />
+          </Key>
+          <Property Name="FacturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PacienteID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistorialMedico">
+          <Key>
+            <PropertyRef Name="HistorialID" />
+          </Key>
+          <Property Name="HistorialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PacienteID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Diagnostico" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Tratamiento" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Notas" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistorialPacientes">
+          <Key>
+            <PropertyRef Name="PacienteID" />
+          </Key>
+          <Property Name="PacienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Operacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaHoraOperacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="HorarioID" />
+          </Key>
+          <Property Name="HorarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfesionalID" Type="int" Nullable="false" />
+          <Property Name="DiaSemana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraFin" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+          <Property Name="FechaVencimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="PacienteID" />
+          </Key>
+          <Property Name="PacienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaAlta" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profesionales">
+          <Key>
+            <PropertyRef Name="ProfesionalID" />
+          </Key>
+          <Property Name="ProfesionalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Especialidad" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salas">
+          <Key>
+            <PropertyRef Name="SalaID" />
+          </Key>
+          <Property Name="SalaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="ServicioID" />
+          </Key>
+          <Property Name="ServicioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiciosPrestados">
+          <Key>
+            <PropertyRef Name="ServicioPrestadoID" />
+          </Key>
+          <Property Name="ServicioPrestadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CitaID" Type="int" Nullable="false" />
+          <Property Name="ServicioID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tratamientos">
+          <Key>
+            <PropertyRef Name="TratamientoID" />
+          </Key>
+          <Property Name="TratamientoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PacienteID" Type="int" Nullable="false" />
+          <Property Name="TipoTratamiento" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="EstadoID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Citas__PacienteI__267ABA7A">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__Pacie__3A81B327">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Facturacion" Type="Self.Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historial__Pacie__37A5467C">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="HistorialMedico" Type="Self.HistorialMedico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="HistorialMedico">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horarios__Profes__34C8D9D1">
+          <End Role="Profesionales" Type="Self.Profesionales" Multiplicity="1" />
+          <End Role="Horarios" Type="Self.Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="ProfesionalID" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="ProfesionalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__CitaI__3F466844">
+          <End Role="Citas" Type="Self.Citas" Multiplicity="1" />
+          <End Role="ServiciosPrestados" Type="Self.ServiciosPrestados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citas">
+              <PropertyRef Name="CitaID" />
+            </Principal>
+            <Dependent Role="ServiciosPrestados">
+              <PropertyRef Name="CitaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__Servi__403A8C7D">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+          <End Role="ServiciosPrestados" Type="Self.ServiciosPrestados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="ServicioID" />
+            </Principal>
+            <Dependent Role="ServiciosPrestados">
+              <PropertyRef Name="ServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tratamien__Estad__2E1BDC42">
+          <End Role="EstadosTratamiento" Type="Self.EstadosTratamiento" Multiplicity="1" />
+          <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosTratamiento">
+              <PropertyRef Name="EstadoID" />
+            </Principal>
+            <Dependent Role="Tratamientos">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tratamien__Pacie__2D27B809">
+          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="1" />
+          <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="Tratamientos">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FisioterapiayOsteopatiaArielMongeModelStoreContainer">
+          <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadosTratamiento" EntityType="Self.EstadosTratamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturacion" EntityType="Self.Facturacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistorialMedico" EntityType="Self.HistorialMedico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistorialPacientes" EntityType="Self.HistorialPacientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesionales" EntityType="Self.Profesionales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiciosPrestados" EntityType="Self.ServiciosPrestados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tratamientos" EntityType="Self.Tratamientos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Citas__PacienteI__267ABA7A" Association="Self.FK__Citas__PacienteI__267ABA7A">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__Pacie__3A81B327" Association="Self.FK__Facturaci__Pacie__3A81B327">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historial__Pacie__37A5467C" Association="Self.FK__Historial__Pacie__37A5467C">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="HistorialMedico" EntitySet="HistorialMedico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horarios__Profes__34C8D9D1" Association="Self.FK__Horarios__Profes__34C8D9D1">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__CitaI__3F466844" Association="Self.FK__Servicios__CitaI__3F466844">
+            <End Role="Citas" EntitySet="Citas" />
+            <End Role="ServiciosPrestados" EntitySet="ServiciosPrestados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Servi__403A8C7D" Association="Self.FK__Servicios__Servi__403A8C7D">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="ServiciosPrestados" EntitySet="ServiciosPrestados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tratamien__Estad__2E1BDC42" Association="Self.FK__Tratamien__Estad__2E1BDC42">
+            <End Role="EstadosTratamiento" EntitySet="EstadosTratamiento" />
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tratamien__Pacie__2D27B809" Association="Self.FK__Tratamien__Pacie__2D27B809">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FisioterapiayOsteopatiaArielMongeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FisioterapiayOsteopatiaArielMongeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Citas" EntityType="FisioterapiayOsteopatiaArielMongeModel.Citas" />
+          <EntitySet Name="EstadosTratamiento" EntityType="FisioterapiayOsteopatiaArielMongeModel.EstadosTratamiento" />
+          <EntitySet Name="Facturacion" EntityType="FisioterapiayOsteopatiaArielMongeModel.Facturacion" />
+          <EntitySet Name="HistorialMedico" EntityType="FisioterapiayOsteopatiaArielMongeModel.HistorialMedico" />
+          <EntitySet Name="HistorialPacientes" EntityType="FisioterapiayOsteopatiaArielMongeModel.HistorialPacientes" />
+          <EntitySet Name="Horarios" EntityType="FisioterapiayOsteopatiaArielMongeModel.Horarios" />
+          <EntitySet Name="Inventario" EntityType="FisioterapiayOsteopatiaArielMongeModel.Inventario" />
+          <EntitySet Name="Pacientes" EntityType="FisioterapiayOsteopatiaArielMongeModel.Pacientes" />
+          <EntitySet Name="Profesionales" EntityType="FisioterapiayOsteopatiaArielMongeModel.Profesionales" />
+          <EntitySet Name="Salas" EntityType="FisioterapiayOsteopatiaArielMongeModel.Salas" />
+          <EntitySet Name="Servicios" EntityType="FisioterapiayOsteopatiaArielMongeModel.Servicios" />
+          <EntitySet Name="ServiciosPrestados" EntityType="FisioterapiayOsteopatiaArielMongeModel.ServiciosPrestados" />
+          <EntitySet Name="Tratamientos" EntityType="FisioterapiayOsteopatiaArielMongeModel.Tratamientos" />
+          <AssociationSet Name="FK__Citas__PacienteI__267ABA7A" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Citas__PacienteI__267ABA7A">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__CitaI__3F466844" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__CitaI__3F466844">
+            <End Role="Citas" EntitySet="Citas" />
+            <End Role="ServiciosPrestados" EntitySet="ServiciosPrestados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tratamien__Estad__2E1BDC42" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Estad__2E1BDC42">
+            <End Role="EstadosTratamiento" EntitySet="EstadosTratamiento" />
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturaci__Pacie__3A81B327" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Facturaci__Pacie__3A81B327">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Facturacion" EntitySet="Facturacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historial__Pacie__37A5467C" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Historial__Pacie__37A5467C">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="HistorialMedico" EntitySet="HistorialMedico" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Horarios__Profes__34C8D9D1" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Horarios__Profes__34C8D9D1">
+            <End Role="Profesionales" EntitySet="Profesionales" />
+            <End Role="Horarios" EntitySet="Horarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tratamien__Pacie__2D27B809" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Pacie__2D27B809">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicios__Servi__403A8C7D" Association="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__Servi__403A8C7D">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="ServiciosPrestados" EntitySet="ServiciosPrestados" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="CitaID" />
+          </Key>
+          <Property Name="CitaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PacienteID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Motivo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pacientes" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Citas__PacienteI__267ABA7A" FromRole="Citas" ToRole="Pacientes" />
+          <NavigationProperty Name="ServiciosPrestados" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__CitaI__3F466844" FromRole="Citas" ToRole="ServiciosPrestados" />
+        </EntityType>
+        <EntityType Name="EstadosTratamiento">
+          <Key>
+            <PropertyRef Name="EstadoID" />
+          </Key>
+          <Property Name="EstadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tratamientos" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Estad__2E1BDC42" FromRole="EstadosTratamiento" ToRole="Tratamientos" />
+        </EntityType>
+        <EntityType Name="Facturacion">
+          <Key>
+            <PropertyRef Name="FacturaID" />
+          </Key>
+          <Property Name="FacturaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PacienteID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Monto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pacientes" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Facturaci__Pacie__3A81B327" FromRole="Facturacion" ToRole="Pacientes" />
+        </EntityType>
+        <EntityType Name="HistorialMedico">
+          <Key>
+            <PropertyRef Name="HistorialID" />
+          </Key>
+          <Property Name="HistorialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PacienteID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Diagnostico" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Tratamiento" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notas" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pacientes" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Historial__Pacie__37A5467C" FromRole="HistorialMedico" ToRole="Pacientes" />
+        </EntityType>
+        <EntityType Name="HistorialPacientes">
+          <Key>
+            <PropertyRef Name="PacienteID" />
+          </Key>
+          <Property Name="PacienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Operacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaHoraOperacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Horarios">
+          <Key>
+            <PropertyRef Name="HorarioID" />
+          </Key>
+          <Property Name="HorarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfesionalID" Type="Int32" Nullable="false" />
+          <Property Name="DiaSemana" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraFin" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Profesionales" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Horarios__Profes__34C8D9D1" FromRole="Horarios" ToRole="Profesionales" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaVencimiento" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Pacientes">
+          <Key>
+            <PropertyRef Name="PacienteID" />
+          </Key>
+          <Property Name="PacienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Citas" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Citas__PacienteI__267ABA7A" FromRole="Pacientes" ToRole="Citas" />
+          <NavigationProperty Name="Facturacion" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Facturaci__Pacie__3A81B327" FromRole="Pacientes" ToRole="Facturacion" />
+          <NavigationProperty Name="HistorialMedico" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Historial__Pacie__37A5467C" FromRole="Pacientes" ToRole="HistorialMedico" />
+          <NavigationProperty Name="Tratamientos" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Pacie__2D27B809" FromRole="Pacientes" ToRole="Tratamientos" />
+        </EntityType>
+        <EntityType Name="Profesionales">
+          <Key>
+            <PropertyRef Name="ProfesionalID" />
+          </Key>
+          <Property Name="ProfesionalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Especialidad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Horarios" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Horarios__Profes__34C8D9D1" FromRole="Profesionales" ToRole="Horarios" />
+        </EntityType>
+        <EntityType Name="Salas">
+          <Key>
+            <PropertyRef Name="SalaID" />
+          </Key>
+          <Property Name="SalaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="ServicioID" />
+          </Key>
+          <Property Name="ServicioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="ServiciosPrestados" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__Servi__403A8C7D" FromRole="Servicios" ToRole="ServiciosPrestados" />
+        </EntityType>
+        <EntityType Name="ServiciosPrestados">
+          <Key>
+            <PropertyRef Name="ServicioPrestadoID" />
+          </Key>
+          <Property Name="ServicioPrestadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CitaID" Type="Int32" Nullable="false" />
+          <Property Name="ServicioID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Monto" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Citas" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__CitaI__3F466844" FromRole="ServiciosPrestados" ToRole="Citas" />
+          <NavigationProperty Name="Servicios" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Servicios__Servi__403A8C7D" FromRole="ServiciosPrestados" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="Tratamientos">
+          <Key>
+            <PropertyRef Name="TratamientoID" />
+          </Key>
+          <Property Name="TratamientoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PacienteID" Type="Int32" Nullable="false" />
+          <Property Name="TipoTratamiento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadosTratamiento" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Estad__2E1BDC42" FromRole="Tratamientos" ToRole="EstadosTratamiento" />
+          <NavigationProperty Name="Pacientes" Relationship="FisioterapiayOsteopatiaArielMongeModel.FK__Tratamien__Pacie__2D27B809" FromRole="Tratamientos" ToRole="Pacientes" />
+        </EntityType>
+        <Association Name="FK__Citas__PacienteI__267ABA7A">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Citas" Role="Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__CitaI__3F466844">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Citas" Role="Citas" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.ServiciosPrestados" Role="ServiciosPrestados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citas">
+              <PropertyRef Name="CitaID" />
+            </Principal>
+            <Dependent Role="ServiciosPrestados">
+              <PropertyRef Name="CitaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tratamien__Estad__2E1BDC42">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.EstadosTratamiento" Role="EstadosTratamiento" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Tratamientos" Role="Tratamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosTratamiento">
+              <PropertyRef Name="EstadoID" />
+            </Principal>
+            <Dependent Role="Tratamientos">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturaci__Pacie__3A81B327">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Facturacion" Role="Facturacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="Facturacion">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historial__Pacie__37A5467C">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.HistorialMedico" Role="HistorialMedico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="HistorialMedico">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Horarios__Profes__34C8D9D1">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Profesionales" Role="Profesionales" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Horarios" Role="Horarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesionales">
+              <PropertyRef Name="ProfesionalID" />
+            </Principal>
+            <Dependent Role="Horarios">
+              <PropertyRef Name="ProfesionalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tratamien__Pacie__2D27B809">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Pacientes" Role="Pacientes" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Tratamientos" Role="Tratamientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacientes">
+              <PropertyRef Name="PacienteID" />
+            </Principal>
+            <Dependent Role="Tratamientos">
+              <PropertyRef Name="PacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicios__Servi__403A8C7D">
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.Servicios" Role="Servicios" Multiplicity="1" />
+          <End Type="FisioterapiayOsteopatiaArielMongeModel.ServiciosPrestados" Role="ServiciosPrestados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="ServicioID" />
+            </Principal>
+            <Dependent Role="ServiciosPrestados">
+              <PropertyRef Name="ServicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FisioterapiayOsteopatiaArielMongeModelStoreContainer" CdmEntityContainer="FisioterapiayOsteopatiaArielMongeEntities">
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Citas">
+              <MappingFragment StoreEntitySet="Citas">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="CitaID" ColumnName="CitaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadosTratamiento">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.EstadosTratamiento">
+              <MappingFragment StoreEntitySet="EstadosTratamiento">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturacion">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Facturacion">
+              <MappingFragment StoreEntitySet="Facturacion">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="FacturaID" ColumnName="FacturaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistorialMedico">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.HistorialMedico">
+              <MappingFragment StoreEntitySet="HistorialMedico">
+                <ScalarProperty Name="Notas" ColumnName="Notas" />
+                <ScalarProperty Name="Tratamiento" ColumnName="Tratamiento" />
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="HistorialID" ColumnName="HistorialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistorialPacientes">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.HistorialPacientes">
+              <MappingFragment StoreEntitySet="HistorialPacientes">
+                <ScalarProperty Name="FechaHoraOperacion" ColumnName="FechaHoraOperacion" />
+                <ScalarProperty Name="Operacion" ColumnName="Operacion" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Horarios">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Horarios">
+              <MappingFragment StoreEntitySet="Horarios">
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="DiaSemana" ColumnName="DiaSemana" />
+                <ScalarProperty Name="ProfesionalID" ColumnName="ProfesionalID" />
+                <ScalarProperty Name="HorarioID" ColumnName="HorarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventario">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Inventario">
+              <MappingFragment StoreEntitySet="Inventario">
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Pacientes">
+              <MappingFragment StoreEntitySet="Pacientes">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesionales">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Profesionales">
+              <MappingFragment StoreEntitySet="Profesionales">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ProfesionalID" ColumnName="ProfesionalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salas">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Salas">
+              <MappingFragment StoreEntitySet="Salas">
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="SalaID" ColumnName="SalaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Servicios">
+              <MappingFragment StoreEntitySet="Servicios">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiciosPrestados">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.ServiciosPrestados">
+              <MappingFragment StoreEntitySet="ServiciosPrestados">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ServicioID" ColumnName="ServicioID" />
+                <ScalarProperty Name="CitaID" ColumnName="CitaID" />
+                <ScalarProperty Name="ServicioPrestadoID" ColumnName="ServicioPrestadoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tratamientos">
+            <EntityTypeMapping TypeName="FisioterapiayOsteopatiaArielMongeModel.Tratamientos">
+              <MappingFragment StoreEntitySet="Tratamientos">
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="TipoTratamiento" ColumnName="TipoTratamiento" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="TratamientoID" ColumnName="TratamientoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
